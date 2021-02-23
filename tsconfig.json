@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "lib": ["dom", "es6", "es2017", "esnext"],
+    "types": [
+      "node"
+    ],
+    "sourceMap": true
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
