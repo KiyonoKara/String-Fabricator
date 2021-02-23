@@ -35,7 +35,7 @@ class Japanese {
         if (!theStr) { return ""; }
         if (theStr) {
             const parsed = theStr.replace(regex, "");
-            return console.log(parsed);
+            return parsed || "";
         }
     }
 }
