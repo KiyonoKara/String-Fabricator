@@ -1,0 +1,30 @@
+{
+  "name": "string-fabricator",
+  "version": "1.0.0",
+  "description": "A repository with many ways to fabricate strings.",
+  "main": "src/index.ts",
+  "bin": "src/index.ts",
+  "scripts": {
+    "test": "node index.ts"
+  },
+  "keywords": [
+    "typescript",
+    "ts",
+    "ts-node",
+    "strings",
+    "string-parser",
+    "string-manipulation",
+    "typescript-string",
+    "string-method"
+  ],
+  "author": "KaNguy",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KaNguy/String-Fabricator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/KaNguy/String-Fabricator/issues"
+  },
+  "homepage": "https://github.com/KaNguy/String-Fabricator/#readme"
+}
