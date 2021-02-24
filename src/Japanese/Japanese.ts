@@ -38,6 +38,22 @@ class Japanese {
             return parsed || "";
         }
     }
+
+    public getJapaneseCharacterCount(str: string) {
+        interface AnyObject {
+            [key: string]: any
+        }
+
+        let finalObj: AnyObject = {};
+
+        for (let i in regexJapanese) {
+
+            let j = this.extractJapaneseCharacters(str, i);
+            finalObj[i] = j.length;
+        }
+
+        return finalObj;
+    }
 }
 
 export { Japanese };
