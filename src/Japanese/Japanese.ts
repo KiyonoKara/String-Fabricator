@@ -2,7 +2,14 @@ interface Options {
     type?: string;
 }
 
-
+const size: Function = function(obj) {
+    let size = 0,
+        key;
+    for (key in obj) {
+        if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+};
 
 const regexJapanese = {
     punctuation: /[\u3000-\u303F]/g,
