@@ -2,6 +2,8 @@ interface Options {
     type?: string;
 }
 
+
+
 const regexJapanese = {
     punctuation: /[\u3000-\u303F]/g,
     hiragana: /[\u3040-\u309f]/g,
@@ -12,6 +14,7 @@ const regexJapanese = {
     any: /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B|[0-9]/g
 }
 
+// @ts-ignore
 class Japanese {
     options: Options;
     constructor(options?: Partial<Options>) {
@@ -53,6 +56,18 @@ class Japanese {
         }
 
         return finalObj;
+    }
+    
+    public fabricateJapaneseStrings(str?: Partial<Array<string>> | string) {
+        if (typeof str === "string") { return this.extractJapaneseCharacters(str); }
+        else if (typeof str === "object") {
+            let arr: Array<string> = [];
+            for (let i in str) {
+                if (str.hasOwnProperty(i))
+                    arr[i] = this.extractJapaneseCharacters(str[i]);
+            }
+            return arr;
+        }
     }
 }
 
