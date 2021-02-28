@@ -27,6 +27,13 @@ class Japanese {
         this.options = options || {};
     }
 
+    methods = {
+        extractJapaneseCharacters: this.extractJapaneseCharacters,
+        removeJapaneseCharacters: this.removeJapaneseCharacters,
+        getJapaneseCharacterCount: this.getJapaneseCharacterCount,
+        fabricateJapaneseStrings: this.fabricateJapaneseStrings
+    }
+
     public extractJapaneseCharacters(str: string, type?: string) {
         const regex = type ? regexJapanese[type] : this.options.type ? regexJapanese[this.options.type] : regexJapanese.any;
         const theStr = str || "";
@@ -64,17 +71,19 @@ class Japanese {
         return finalObj;
     }
     
-    public fabricateJapaneseStrings(str?: Partial<Array<string>> | string) {
-        if (typeof str === "string") { return this.extractJapaneseCharacters(str); }
+    public fabricateJapaneseStrings(str: Partial<Array<string>> | string, method?: string) {
+        if (typeof str === "string") { return method ? this[this.methods[method]](str) : this.extractJapaneseCharacters(str); }
         else if (typeof str === "object") {
             let arr: Array<string> = [];
             for (let i in str) {
-                if (str.hasOwnProperty(i))
-                    arr[i] = this.extractJapaneseCharacters(str[i]);
+                if (str.hasOwnProperty(i)) {
+                    arr[i] = method ? this[method](str[i] ? str[i] : str) : this.extractJapaneseCharacters(str[i]);
+                }
             }
             return arr;
         }
     }
 }
+
 
 export { Japanese };
