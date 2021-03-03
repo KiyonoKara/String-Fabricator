@@ -18,7 +18,7 @@ const regexJapanese = {
     roman: /[\uff00-\uff9f]/g,
     cjk: /[\u4e00-\u9faf]/g,
     extendedCJK: /[\u3400-\u4dbf]]/g,
-    any: /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B|[0-9]/g
+    all: /[\u3000-\u303F]|[\u3040-\u309F]|[\u30A0-\u30FF]|[\uFF00-\uFFEF]|[\u4E00-\u9FAF]|[\u2605-\u2606]|[\u2190-\u2195]|\u203B|[0-9]/g
 }
 
 class Japanese {
@@ -35,7 +35,7 @@ class Japanese {
     }
 
     public extractJapaneseCharacters(str: string, type?: string) {
-        const regex = type ? regexJapanese[type] : this.options.type ? regexJapanese[this.options.type] : regexJapanese.any;
+        const regex = type ? regexJapanese[type] : this.options.type ? regexJapanese[this.options.type] : regexJapanese.all;
         const theStr = str || "";
         if (theStr) {
             const extracted = theStr.match(regex)?.join("");
@@ -46,7 +46,7 @@ class Japanese {
     }
 
     public removeJapaneseCharacters(str: string, type?: string) {
-        const regex = type ? regexJapanese[type] : this.options.type ? regexJapanese[this.options.type] : regexJapanese.any;
+        const regex = type ? regexJapanese[type] : this.options.type ? regexJapanese[this.options.type] : regexJapanese.all;
         const theStr = str || "";
         if (!theStr) { return ""; }
         if (theStr) {
@@ -83,7 +83,18 @@ class Japanese {
             return arr;
         }
     }
-}
 
+    public cleanJapanese(str: string): string {
+        return str
+            .replace(/\s/g, "")
+            .replace(",", "、")
+            .replace(".", "。")
+            .replace("~", "〜")
+            .replace(":", "：")
+            .replace("!", "！")
+            .replace("?", "？")
+            .trim();
+    }
+}
 
 export { Japanese };
